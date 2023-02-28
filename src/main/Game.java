@@ -8,7 +8,7 @@ public class Game extends JFrame {
 
     // Constructor
     public Game() {
-        setSize(400, 400);
+        setSize(640, 640);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // Center the window at startup
