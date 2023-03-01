@@ -43,8 +43,6 @@ public class GameScreen extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // This is required to draw the background and other things
 
-        //g.drawImage(image, 0, 0, null);
-
         for (int y = 0; y < 20; y++) {
             for (int x = 0; x < 20; x++) {
                 g.drawImage(sprites.get(random.nextInt(100)), x * 32, y * 32, null);

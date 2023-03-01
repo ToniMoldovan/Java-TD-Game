@@ -1,5 +1,8 @@
 package main;
 
+import inputs.KeyboardListener;
+import inputs.MyMouseListener;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import java.awt.image.BufferedImage;
@@ -15,6 +18,9 @@ public class Game extends JFrame implements Runnable{
     private final double FPS_SET = 120.0; // The frames per second
     private final double UPS_SET = 60.0; // The updates per second
 
+    private MyMouseListener mouseListener;
+    private KeyboardListener keyboardListener;
+
     // Constructor
     public Game() {
         importImg();
@@ -27,6 +33,15 @@ public class Game extends JFrame implements Runnable{
 
         pack(); // This is required to make the window the size of the JPanel
         setVisible(true);
+    }
+
+    private void initInputs() {
+        mouseListener = new MyMouseListener();
+        keyboardListener = new KeyboardListener();
+
+        addMouseListener(mouseListener);
+        addMouseMotionListener(mouseListener);
+        addKeyListener(keyboardListener);
     }
 
     private void importImg() {
@@ -44,6 +59,9 @@ public class Game extends JFrame implements Runnable{
     /***** Game Start method ******/
     public void start() {
         gameThread = new Thread(this); // we pass this because the class implements Runnable
+
+        initInputs();
+
         gameThread.start();
     }
 
