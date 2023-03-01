@@ -6,15 +6,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class GameScreen extends JPanel{
-    private Dimension size;
-    private Render render;
+    private Dimension size; // The size of the JPanel
     private Game game;
 
     // Constructor
     public GameScreen(Game game) {
         this.game = game;
-        render = new Render(this);
-
         setPanelSize();
     }
 
@@ -26,12 +23,8 @@ public class GameScreen extends JPanel{
         setMaximumSize(size);
     }
 
-
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // This is required to draw the background and other things
-
-        render.render(g);
-
+        game.getRender().render(g); // Render the game
     }
 }

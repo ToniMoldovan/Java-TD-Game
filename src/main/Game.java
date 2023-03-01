@@ -2,6 +2,10 @@ package main;
 
 import inputs.KeyboardListener;
 import inputs.MyMouseListener;
+import scenes.Menu;
+import scenes.Playing;
+import scenes.Settings;
+
 import javax.swing.JFrame;
 
 public class Game extends JFrame implements Runnable{
@@ -17,17 +21,31 @@ public class Game extends JFrame implements Runnable{
     private MyMouseListener mouseListener;
     private KeyboardListener keyboardListener;
 
+    //Classes
+    private Render render;
+    private Menu menu;
+    private Playing playing;
+    private Settings settings;
+
     // Constructor
     public Game() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        gameScreen = new GameScreen(this);
+        initClasses();
         add(gameScreen);
 
         pack(); // This is required to make the window the size of the JPanel
         setLocationRelativeTo(null); // Center the window at startup
 
         setVisible(true);
+    }
+
+    private void initClasses() {
+        gameScreen = new GameScreen(this);
+        render = new Render(this);
+        menu = new Menu(this);
+        playing = new Playing(this);
+        settings = new Settings(this);
     }
 
     private void initInputs() {
@@ -40,8 +58,6 @@ public class Game extends JFrame implements Runnable{
 
         requestFocus(); // This is required to make the JPanel listen to the keyboard
     }
-
-
 
     /***** Game Start method ******/
     public void start() {
@@ -107,5 +123,23 @@ public class Game extends JFrame implements Runnable{
 
     public void setEnableFPS_UPS_log(boolean enableFPS_UPS_log) {
         this.enableFPS_UPS_log = enableFPS_UPS_log;
+    }
+
+    // Getters and setters
+
+    public Render getRender() {
+        return render;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public Playing getPlaying() {
+        return playing;
+    }
+
+    public Settings getSettings() {
+        return settings;
     }
 }
