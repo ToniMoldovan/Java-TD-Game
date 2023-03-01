@@ -10,17 +10,26 @@ public class GameScreen extends JPanel{
     private Random random;
     private BufferedImage image;
 
-    private ArrayList<BufferedImage> sprites = new ArrayList<BufferedImage>();
+    private Dimension size;
+
+    private ArrayList<BufferedImage> sprites = new ArrayList<>();
 
     // Constructor
     public GameScreen(BufferedImage image) {
         this.image = image;
 
+        setPanelSize();
         loadSprites();
 
-        System.out.println("Sprite Array size: " + sprites.size());
-
         random = new Random();
+    }
+
+    private void setPanelSize() {
+        size = new Dimension(640, 640); // Set the size of the JPanel
+
+        setPreferredSize(size);
+        setMinimumSize(size);
+        setMaximumSize(size);
     }
 
     private void loadSprites() {
@@ -34,8 +43,6 @@ public class GameScreen extends JPanel{
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // This is required to draw the background and other things
 
-        //g.drawImage(sprites.get(19), 0, 0, null);
-
         //g.drawImage(image, 0, 0, null);
 
         for (int y = 0; y < 20; y++) {
@@ -45,5 +52,4 @@ public class GameScreen extends JPanel{
         }
 
     }
-
 }
