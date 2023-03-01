@@ -18,6 +18,8 @@ public class Game extends JFrame implements Runnable{
     private final double FPS_SET = 120.0; // The frames per second
     private final double UPS_SET = 60.0; // The updates per second
 
+    private boolean enableFPS_UPS_log = false; // Enable or disable the FPS and UPS log
+
     private MyMouseListener mouseListener;
     private KeyboardListener keyboardListener;
 
@@ -42,6 +44,8 @@ public class Game extends JFrame implements Runnable{
         addMouseListener(mouseListener);
         addMouseMotionListener(mouseListener);
         addKeyListener(keyboardListener);
+
+        requestFocus(); // This is required to make the JPanel listen to the keyboard
     }
 
     private void importImg() {
@@ -104,13 +108,21 @@ public class Game extends JFrame implements Runnable{
                 updates++;
             }
 
-            // FPS and UPS counter
-            if (System.currentTimeMillis() - lastTime >= 1000) {
+            // FPS and UPS counter log
+            if (System.currentTimeMillis() - lastTime >= 1000 && enableFPS_UPS_log) {
                 System.out.println("FPS: " + frames + "\t| UPS: " + updates);
                 frames = 0;
                 updates = 0;
                 lastTime = System.currentTimeMillis();
             }
         }
+    }
+
+    public boolean isEnableFPS_UPS_log() {
+        return enableFPS_UPS_log;
+    }
+
+    public void setEnableFPS_UPS_log(boolean enableFPS_UPS_log) {
+        this.enableFPS_UPS_log = enableFPS_UPS_log;
     }
 }
